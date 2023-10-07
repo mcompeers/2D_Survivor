@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://damlmoe3abp5v"]
+
+[ext_resource type="Script" path="res://scenes/manager/arena_time_manager.gd" id="1_0ftmw"]
+[ext_resource type="PackedScene" uid="uid://xt58a2bd5lbi" path="res://scenes/ui/game_over_screen.tscn" id="2_wp7l6"]
+
+[node name="ArenaTimeManager" type="Node"]
+script = ExtResource("1_0ftmw")
+game_over_screen_scene = ExtResource("2_wp7l6")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 300.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
