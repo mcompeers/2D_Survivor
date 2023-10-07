@@ -4,6 +4,8 @@ extends CharacterBody2D
 @onready var health_component = $HealthComponent as HealthComponent;
 @onready var health_bar = $HealthBar;
 @onready var abilities = $Abilities;
+@onready var animation_player: AnimationPlayer = $AnimationPlayer;
+@onready var sprite: Sprite2D = $Sprite2D
 
 const MAX_SPEED = 150;
 const ACCELERATION_SMOOTHING = 15;
@@ -25,7 +27,16 @@ func _process(delta):
 	velocity = velocity.lerp(target_velocity, 1.0 - exp(-delta * ACCELERATION_SMOOTHING))
 	
 	move_and_slide();
-
+	
+	if velocity.length() > 0.7:
+		animation_player.play("walk")
+	else:
+		animation_player.play("RESET")
+	
+	if velocity.x < 0:
+		sprite.flip_h = true
+	elif velocity.x > 0:
+		sprite.flip_h = false;
 
 func get_movement_vector():
 	var x_movement = Input.get_action_strength("move_right") - Input.get_action_strength("move_left");
