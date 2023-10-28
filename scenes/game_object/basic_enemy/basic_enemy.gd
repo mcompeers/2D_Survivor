@@ -1,18 +1,24 @@
 extends CharacterBody2D
 
-const MAX_SPEED = 50;
+@onready var animation_player = $AnimationPlayer;
+@onready var sprite: Sprite2D = $Sprite2D;
+@onready var velocity_component: VelocityComponent = $VelocityComponent;
+@onready var random_stream_player_2d_component = $RandomStreamPlayer2DComponent
 
-@onready var health: HealthComponent = $HealthComponent
+
+func _ready():
+	animation_player.play("floating")
 
 
 func _process(delta):
-	var direction = get_direcion_to_player();
-	velocity = direction * MAX_SPEED;
-	move_and_slide();
+	velocity_component.accelerate_to_player();
+	velocity_component.move(self);
+	
+	if velocity.x < 0:
+		sprite.flip_h = true;
+	elif velocity.x > 0:
+		sprite.flip_h = false;
 
 
-func get_direcion_to_player():
-	var player_node = get_tree().get_first_node_in_group("player") as Node2D;
-	if player_node != null:
-		return (player_node.global_position - global_position).normalized();
-	return Vector2.ZERO;
+func _on_hurt_box_component_hit():
+	random_stream_player_2d_component.play_random()

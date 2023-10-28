@@ -2,9 +2,17 @@ extends CanvasLayer
 
 @onready var title_label: Label = $%TitleLabel;
 @onready var description_label: Label = $%DescriptionLabel;
+@onready var panel_container = %PanelContainer
 
 
 func _ready():
+	panel_container.pivot_offset = panel_container.size  / 2;
+	var tween = create_tween()
+	tween.tween_property(panel_container, "scale", Vector2.ZERO, 0);
+	tween.tween_property(panel_container, "scale", Vector2.ONE, 0.3)\
+	.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK);
+	
+	
 	get_tree().paused = true;
 	$%RestartButton.pressed.connect(on_restart_button_pressed)
 	$%QuitButton.pressed.connect(on_quit_button_pressed)
@@ -13,6 +21,14 @@ func _ready():
 func set_defeat():
 	title_label.text = "Defeat"
 	description_label.text = "You lost!"
+	play_jingle(true)
+
+
+func play_jingle(defeat: bool = false):
+	if defeat:
+		$DefeatStreamPlayer.play()
+	else:
+		$VictoryStreamPlayer.play()
 
 
 func on_restart_button_pressed():

@@ -1,9 +1,55 @@
-[gd_scene load_steps=13 format=3 uid="uid://bhhl1fhwbm87q"]
+[gd_scene load_steps=19 format=3 uid="uid://bhhl1fhwbm87q"]
 
 [ext_resource type="Script" path="res://scenes/game_object/player/player.gd" id="1_bgsr3"]
 [ext_resource type="Texture2D" uid="uid://dw777q8nlpi4q" path="res://assets/player/player.png" id="2_akct7"]
 [ext_resource type="PackedScene" uid="uid://dactduiobkbvf" path="res://scenes/ability/sword_ability_controller/sword_ability_controller.tscn" id="2_hrhi3"]
+[ext_resource type="PackedScene" uid="uid://dblqa4mxoclmi" path="res://scenes/component/velocity_component.tscn" id="2_l2jmo"]
 [ext_resource type="Script" path="res://scenes/component/health.gd" id="2_oyfop"]
+[ext_resource type="PackedScene" uid="uid://b3pq3ybcqimbo" path="res://scenes/component/random_stream_player_2d_component.tscn" id="4_x2uav"]
+[ext_resource type="AudioStream" uid="uid://co5oafjc8ba0e" path="res://assets/audio/impactPlate_medium_000.ogg" id="5_1u7oy"]
+[ext_resource type="AudioStream" uid="uid://28wnbxtpev6x" path="res://assets/audio/impactPlate_medium_001.ogg" id="6_g1j2c"]
+[ext_resource type="AudioStream" uid="uid://cdeou3won25h7" path="res://assets/audio/impactPlate_medium_002.ogg" id="7_w4k04"]
+[ext_resource type="AudioStream" uid="uid://crhwy76t3a61e" path="res://assets/audio/impactPlate_medium_003.ogg" id="8_2ffen"]
+[ext_resource type="AudioStream" uid="uid://dxxfsx4xbrufr" path="res://assets/audio/impactPlate_medium_004.ogg" id="9_tmcyl"]
+
+[sub_resource type="Animation" id="Animation_jb1cg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_gloi5"]
 resource_name = "walk"
@@ -46,53 +92,11 @@ tracks/2/keys = {
 "values": [Vector2(1, 0.8), Vector2(1, 1), Vector2(0.952, 0.8), Vector2(1, 1), Vector2(1, 0.8)]
 }
 
-[sub_resource type="Animation" id="Animation_jb1cg"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_em78r"]
 _data = {
 "RESET": SubResource("Animation_jb1cg"),
 "walk": SubResource("Animation_gloi5")
 }
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8pu5e"]
-bg_color = Color(0.247059, 0.14902, 0.192157, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7o4t6"]
 bg_color = Color(0.262745, 0.882353, 0.701961, 1)
@@ -121,8 +125,15 @@ libraries = {
 "": SubResource("AnimationLibrary_em78r")
 }
 
+[node name="VelocityComponent" parent="." instance=ExtResource("2_l2jmo")]
+max_speed = 100
+acceleration = 25.0
+
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("2_oyfop")
+
+[node name="RandomStreamPlayer2DComponent" parent="." instance=ExtResource("4_x2uav")]
+streams = Array[AudioStream]([ExtResource("5_1u7oy"), ExtResource("6_g1j2c"), ExtResource("7_w4k04"), ExtResource("8_2ffen"), ExtResource("9_tmcyl")])
 
 [node name="Abilities" type="Node" parent="."]
 
@@ -144,7 +155,6 @@ offset_bottom = -20.0
 grow_horizontal = 2
 pivot_offset = Vector2(16, 3)
 size_flags_horizontal = 4
-theme_override_styles/background = SubResource("StyleBoxFlat_8pu5e")
 theme_override_styles/fill = SubResource("StyleBoxFlat_7o4t6")
 max_value = 1.0
 value = 0.5

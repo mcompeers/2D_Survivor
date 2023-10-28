@@ -1,0 +1,69 @@
+[gd_resource type="Theme" load_steps=10 format=3 uid="uid://cf2fw4pte0mou"]
+
+[ext_resource type="Texture2D" uid="uid://bk8etghmlgk3t" path="res://assets/theme/ui.png" id="1_pg6um"]
+[ext_resource type="FontFile" uid="uid://dxftdigp5gslm" path="res://resources/theme/Rockboxcond12.ttf" id="1_t8s7g"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0iilt"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+texture = ExtResource("1_pg6um")
+texture_margin_left = 1.0
+texture_margin_top = 1.0
+texture_margin_right = 1.0
+texture_margin_bottom = 1.0
+region_rect = Rect2(18, 2, 12, 12)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_alq3w"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wpmgm"]
+texture = ExtResource("1_pg6um")
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 3.0
+region_rect = Rect2(20, 20, 8, 8)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_84tih"]
+texture = ExtResource("1_pg6um")
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 3.0
+region_rect = Rect2(4, 20, 8, 8)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gq5pc"]
+texture = ExtResource("1_pg6um")
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 3.0
+region_rect = Rect2(4, 20, 8, 8)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fki5m"]
+texture = ExtResource("1_pg6um")
+texture_margin_left = 4.0
+texture_margin_top = 7.0
+texture_margin_right = 4.0
+texture_margin_bottom = 3.0
+region_rect = Rect2(0, 0, 16, 16)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8pu5e"]
+bg_color = Color(0.247059, 0.14902, 0.192157, 1)
+
+[resource]
+default_font = ExtResource("1_t8s7g")
+default_font_size = 16
+AlternatePanelContainer/base_type = &"PanelContainer"
+AlternatePanelContainer/styles/panel = SubResource("StyleBoxTexture_0iilt")
+Button/colors/font_color = Color(0.247059, 0.14902, 0.192157, 1)
+Button/colors/font_focus_color = Color(0.247059, 0.14902, 0.192157, 1)
+Button/colors/font_hover_color = Color(0.741176, 0.423529, 0.290196, 1)
+Button/styles/focus = SubResource("StyleBoxEmpty_alq3w")
+Button/styles/hover = SubResource("StyleBoxTexture_wpmgm")
+Button/styles/normal = SubResource("StyleBoxTexture_84tih")
+Button/styles/pressed = SubResource("StyleBoxTexture_gq5pc")
+Label/constants/line_spacing = 0
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_fki5m")
+ProgressBar/styles/background = SubResource("StyleBoxFlat_8pu5e")

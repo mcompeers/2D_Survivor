@@ -17,7 +17,6 @@ func _process(delta):
 	if timer.time_left <= next_time_target:
 		arena_difficulty += 1;
 		arena_difficulty_increased.emit(arena_difficulty)
-		print(arena_difficulty)
 
 
 func get_time_elapsed():
@@ -29,3 +28,4 @@ func _on_timer_timeout():
 	
 	var game_over_screen_instance = game_over_screen_scene.instantiate()
 	add_child(game_over_screen_instance)
+	game_over_screen_instance.play_jingle()
